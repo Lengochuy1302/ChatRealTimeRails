@@ -9,19 +9,19 @@
           <div class="form-floating mb-3">
             <%= f.email_field :email, class: "form-control", placeholder: "name@example.com", autofocus: true %>
             <%= f.label :email %>
-          </div>
+  </div>
 
           <div class="form-floating mb-3">
             <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
             <%= f.label :password %>
-          </div>
+  </div>
 
-          <% if devise_mapping.rememberable? %>
+  <% if devise_mapping.rememberable? %>
             <div class="form-check mb-3">
               <%= f.check_box :remember_me, class: "form-check-input" %>
               <%= f.label :remember_me, class: "form-check-label" %>
-            </div>
-          <% end %>
+    </div>
+  <% end %>
 
           <div class="d-grid">
             <%= f.submit "Log in", class: "btn btn-primary btn-lg" %>
