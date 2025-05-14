@@ -1,0 +1,62 @@
+<div class="message <%= message.user == current_user ? 'current-user' : '' %>">
+  <div class="message-content">
+    <div class="message-header">
+      <% if message.user != current_user %>
+        <span class="username"><%= message.user.email.split('@').first %></span>
+      <% end %>
+      <span class="timestamp"><%= time_ago_in_words(message.created_at) %> ago</span>
+    </div>
+    <div class="message-text">
+      <%= message.content %>
+    </div>
+  </div>
+</div>
+
+<% content_for :styles do %>
+  <style>
+    .message {
+      clear: both;
+      max-width: 75%;
+      margin-bottom: 1rem;
+    }
+
+    .message.current-user {
+      margin-left: auto;
+    }
+
+    .message:not(.current-user) {
+      margin-right: auto;
+    }
+
+    .message-content {
+      display: inline-block;
+      word-wrap: break-word;
+      max-width: 100%;
+    }
+
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .timestamp {
+      white-space: nowrap;
+    }
+
+    /* Clear float after each message */
+    .message::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .bg-light {
+      background-color: #f8f9fa !important;
+    }
+
+    .text-opacity-75 {
+      opacity: 0.75;
+    }
+  </style>
+<% end %>

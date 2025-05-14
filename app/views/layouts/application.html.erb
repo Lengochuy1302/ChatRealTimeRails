@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Chat App" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= action_cable_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- ActionCable -->
+    <script src="https://cdn.jsdelivr.net/npm/@rails/actioncable"></script>
+
+    <!-- Custom JS -->
+    <script src="/js/cable.js" defer></script>
+    <script src="/js/chat.js" defer></script>
+
+    <%= yield :styles %>
+  </head>
+
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+      <div class="container">
+        <%= link_to 'Chat App', root_path, class: 'navbar-brand' %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <span class="nav-link"><%= current_user.email %></span>
+              </li>
+              <li class="nav-item">
+                <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-outline-light', form_class: 'd-inline' %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to 'Login', new_user_session_path, class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Register', new_user_registration_path, class: 'nav-link' %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid px-4">
+      <% if notice %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= notice %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= alert %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

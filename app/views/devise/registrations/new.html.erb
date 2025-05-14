@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-5">
+    <div class="card shadow-lg border-0 rounded-lg mt-5">
+      <div class="card-header bg-primary text-white text-center py-4">
+        <h2 class="mb-0">Sign up</h2>
+      </div>
+      <div class="card-body p-4">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "needs-validation" }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <div class="form-floating mb-3">
+            <%= f.email_field :email, class: "form-control", placeholder: "name@example.com", autofocus: true %>
+            <%= f.label :email %>
+          </div>
+
+          <div class="form-floating mb-3">
+            <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+            <%= f.label :password %>
+            <% if @minimum_password_length %>
+              <div class="form-text">
+                <small><%= @minimum_password_length %> characters minimum</small>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="form-floating mb-4">
+            <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirm Password" %>
+            <%= f.label :password_confirmation %>
+          </div>
+
+          <div class="d-grid">
+            <%= f.submit "Sign up", class: "btn btn-primary btn-lg" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="card-footer text-center py-3">
+        <div class="small">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :styles do %>
+  <style>
+    .form-floating > label {
+      z-index: 2;
+    }
+
+    .form-floating > .form-control {
+      height: calc(3.5rem + 2px);
+      line-height: 1.25;
+    }
+
+    .form-floating > .form-control:focus {
+      border-color: #86b7fe;
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+    .card {
+      background-color: #ffffff;
+    }
+
+    .card-header {
+      border-bottom: none;
+    }
+
+    .card-footer {
+      background-color: #f8f9fa;
+      border-top: none;
+    }
+
+    .invalid-feedback {
+      display: block;
+    }
+  </style>
+<% end %>
