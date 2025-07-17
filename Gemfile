@@ -63,4 +63,4 @@ group :test do
 end
 
 gem 'devise'
-gem 'redis', '~> 5.0'
+gem 'redis', '~> 5.4'
